@@ -6,78 +6,162 @@
   <title>Ministering Structure — Harare Zimbabwe South Stake</title>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <style>
+    :root {
+      --primary: #000000;
+      --secondary: #333333;
+      --accent: #555555;
+      --bg: #ffffff;
+      --bg-alt: #f8f9fa;
+      --text: #000000;
+      --text-muted: #555555;
+      --border: #000000;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f4f6fb;
-      color: #1a1a2e;
-      padding: 32px 24px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
+
     header {
+      padding: 48px 24px 24px;
       text-align: center;
-      margin-bottom: 28px;
+      background: var(--bg);
+      border-bottom: 1px solid #eee;
     }
-    header h1 { font-size: 1.7rem; font-weight: 700; color: #1a3a6e; }
-    header h3 { font-size: 1rem; font-weight: 400; color: #4A90D9; margin-top: 4px; }
-    header p  { font-size: 0.9rem; color: #666; margin-top: 4px; }
+
+    header h1 { 
+      font-size: 2.2rem; 
+      font-weight: 800; 
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+    }
+    header h3 { font-size: 1.1rem; font-weight: 500; color: var(--text-muted); }
+    header p { font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; font-weight: 500; }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      padding: 16px 12px;
+      background: var(--bg-alt);
+      border-top: 1px solid #ddd;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+      background: transparent;
+    }
+
+    .nav-btn:hover {
+      color: var(--primary);
+      background: rgba(0,0,0,0.05);
+    }
+
+    .nav-btn.active {
+      color: #fff;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     .card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.09);
-      padding: 32px 24px;
-      max-width: 1000px;
-      margin: 0 auto 24px;
+      background: #ffffff;
+      border-radius: 4px;
+      border: 2px solid var(--border);
+      padding: 40px 32px;
+      margin-bottom: 24px;
     }
-    .card h2 {
-      font-size: 1.05rem;
-      color: #1a3a6e;
-      margin-bottom: 20px;
-      border-left: 4px solid #4A90D9;
-      padding-left: 12px;
-    }
-    .mermaid { display: flex; justify-content: center; overflow-x: auto; }
 
-    /* Flow list */
-    ol { padding-left: 20px; }
-    ol li { margin-bottom: 8px; font-size: 0.9rem; line-height: 1.6; }
-    ol li strong { color: #1a3a6e; }
+    .card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .mermaid { 
+      display: flex; 
+      justify-content: center; 
+      overflow-x: auto; 
+      padding: 20px 0;
+    }
 
     /* Table */
-    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-    thead tr { background: #1a3a6e; color: #fff; }
-    thead th { padding: 10px 14px; text-align: left; }
-    tbody tr:nth-child(odd)  { background: #f0f5ff; }
-    tbody tr:nth-child(even) { background: #fff; }
-    tbody td { padding: 9px 14px; }
-    tbody td:first-child { font-weight: 600; color: #1a3a6e; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; border: 2px solid #000; }
+    thead tr { background: #000000; color: #ffffff; }
+    thead th { padding: 14px; text-align: left; border: 1px solid #000; font-weight: 700; }
+    tbody tr:nth-child(odd)  { background: #f9f9f9; }
+    tbody tr:nth-child(even) { background: #ffffff; }
+    tbody td { padding: 12px 14px; border: 1px solid #ddd; }
+    tbody td:first-child { font-weight: 700; color: #000; width: 30%; }
 
-    /* Download buttons */
-    .btn-row {
-      display: flex; gap: 12px; justify-content: center;
-      flex-wrap: wrap; margin: 0 0 24px;
-    }
-    button {
-      padding: 12px 28px; border: none; border-radius: 10px;
-      font-size: 0.95rem; font-weight: 600; cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.15s;
-    }
-    button:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
-    #btn-pdf { background: #1a3a6e; color: #fff; }
-    #btn-png { background: #4A90D9; color: #fff; }
-    #btn-svg { background: #2ECC71; color: #fff; }
-    .note { text-align: center; font-size: 0.78rem; color: #aaa; margin-bottom: 18px; }
+    /* Flow list */
+    ol { padding-left: 24px; list-style-type: decimal; }
+    ol li { margin-bottom: 16px; font-size: 1.05rem; line-height: 1.6; padding-left: 8px; }
+    ol li strong { color: #000000; font-weight: 700; }
+
+
 
     footer {
-      text-align: center; font-size: 0.8rem;
-      color: #999; margin-top: 16px; font-style: italic;
+      text-align: center; padding: 24px 32px 12px;
+      font-size: 0.85rem; color: var(--text-muted);
+      border-top: 1px solid #eee;
+      margin-top: auto;
+      font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.7rem; }
+      nav { flex-wrap: wrap; }
+      .nav-btn { flex: 1; text-align: center; min-width: 140px; }
     }
 
     @media print {
-      .btn-row, .note { display: none; }
-      body { background: #fff; }
-      .card { box-shadow: none; }
+      footer nav { display: none !important; }
+      body { background: #fff; padding: 0; }
+      .page { display: block !important; page-break-after: always; }
+      .card { border: none; padding: 0; margin-bottom: 60px; }
+      header { padding-top: 0; }
     }
   </style>
 </head>
@@ -86,26 +170,17 @@
 <header>
   <h1>General Handbook — Ministering Structure</h1>
   <h3>Harare Zimbabwe South Stake — Unit Level</h3>
-  <p><strong>Date:</strong> 13 April 2026 &nbsp;|&nbsp; <strong>Focus:</strong> Causes &amp; Generations</p>
+  <p><strong>Date:</strong> 19 April 2026</p>
 </header>
 
-<div class="btn-row">
-  <button id="btn-pdf" onclick="downloadPDF()">⬇ Download as PDF</button>
-  <button id="btn-png" onclick="downloadPNG()">🖼 Download as PNG</button>
-  <button id="btn-svg" onclick="downloadSVG()">📐 Download as SVG</button>
-</div>
-<div class="note">
-  PDF → browser print dialog → "Save as PDF" &nbsp;|&nbsp;
-  PNG → high-res image downloaded automatically &nbsp;|&nbsp;
-  SVG → scalable vector file
-</div>
-
-<!-- DIAGRAM 1 -->
-<div class="card">
-  <h2>Ministering Organisation Chart</h2>
-  <div class="mermaid" id="chart1">
+<main>
+  <!-- PAGE 1: ORG CHART -->
+  <div id="org-chart" class="page active">
+    <div class="card">
+      <h2>Ministering Organisation Chart</h2>
+      <div class="mermaid" id="chart1">
 flowchart TD
-    Bishop(["🏛️ Bishop\nPresiding / MV Assist"])
+    Bishop(["🏛️ Bishop\nPresiding / High Priest"])
 
     EQP(["👤 EQ President\n(Elders Quorum)"])
     RSP(["👤 RS President\n(Relief Society)"])
@@ -148,139 +223,75 @@ flowchart TD
     EQFAM --> MIN
     RSFAM --> MIN
 
-    style Bishop fill:#4A90D9,color:#fff,stroke:#2c5f8a
-    style EQP fill:#5B8DD9,color:#fff,stroke:#2c5f8a
-    style RSP fill:#D96B8A,color:#fff,stroke:#8a2c4a
-    style EQC fill:#7BAAD4,color:#fff,stroke:#2c5f8a
-    style RSC fill:#D98AA8,color:#fff,stroke:#8a2c4a
-    style EQMIN fill:#A8C8E8,color:#333,stroke:#2c5f8a
-    style RSMIN fill:#E8A8C0,color:#333,stroke:#8a2c4a
-    style EQCOMP fill:#C8DFF0,color:#333,stroke:#2c5f8a
-    style RSCOMP fill:#F0C8D8,color:#333,stroke:#8a2c4a
-    style EQFAM fill:#E8F4E8,color:#333,stroke:#2c7a2c
-    style RSFAM fill:#F4E8F4,color:#333,stroke:#7a2c7a
-    style EQINT fill:#FFF0C0,color:#333,stroke:#8a6a00
-    style RSINFO fill:#FFF0C0,color:#333,stroke:#8a6a00
-    style MIN fill:#2ECC71,color:#fff,stroke:#1a8a4a
+    style Bishop fill:#000000,color:#ffffff,stroke:#000000
+    style EQP fill:#444444,color:#ffffff,stroke:#000000
+    style RSP fill:#444444,color:#ffffff,stroke:#000000
+    style EQC fill:#ffffff,color:#000000,stroke:#000000
+    style RSC fill:#ffffff,color:#000000,stroke:#000000
+    style EQMIN fill:#dddddd,color:#000000,stroke:#000000
+    style RSMIN fill:#dddddd,color:#000000,stroke:#000000
+    style EQCOMP fill:#f5f5f5,color:#000000,stroke:#000000
+    style RSCOMP fill:#f5f5f5,color:#000000,stroke:#000000
+    style EQFAM fill:#ffffff,color:#000000,stroke:#000000
+    style RSFAM fill:#ffffff,color:#000000,stroke:#000000
+    style EQINT fill:#eeeeee,color:#000000,stroke:#000000
+    style RSINFO fill:#eeeeee,color:#000000,stroke:#000000
+    style MIN fill:#000000,color:#ffffff,stroke:#000000
+      </div>
+    </div>
   </div>
-</div>
 
-<!-- KEY ROLES TABLE -->
-<div class="card">
-  <h2>Key Roles &amp; Responsibilities</h2>
-  <table>
-    <thead>
-      <tr><th>Role</th><th>Responsibility</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Bishop</td><td>Presides over the unit; delegates ministering oversight</td></tr>
-      <tr><td>EQ President</td><td>Oversees Elders Quorum ministering assignments</td></tr>
-      <tr><td>RS President</td><td>Oversees Relief Society ministering assignments</td></tr>
-      <tr><td>Counselor (EQ)</td><td>Directly responsible for EQ ministering coordination</td></tr>
-      <tr><td>Counselor (RS)</td><td>Directly responsible for RS ministering coordination</td></tr>
-      <tr><td>Ministerials (EQ)</td><td>Assigned ministering brothers</td></tr>
-      <tr><td>Ministerials (RS)</td><td>Assigned ministering sisters</td></tr>
-      <tr><td>LS Presidents</td><td>Assist RS Presidents; report to Ward Council + LCR</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- MINISTERING FLOW -->
-<div class="card">
-  <h2>Ministering Flow</h2>
-  <ol>
-    <li><strong>Bishop</strong> presides and assigns oversight to <strong>EQ President</strong> and <strong>RS President</strong></li>
-    <li>Each president appoints a <strong>Counselor</strong> responsible for ministering coordination</li>
-    <li>Counselors manage <strong>Ministerial assignments</strong> (brothers/sisters with companions)</li>
-    <li>Each pair is given <strong>Assigned Families</strong> to minister to</li>
-    <li><strong>EQ</strong> tracks progress through <strong>interviews</strong>; <strong>RS</strong> reports to <strong>Ward Council &amp; LCR</strong></li>
-    <li>The outcome and goal is effective <strong>Ministering</strong> across all assigned families</li>
-  </ol>
-</div>
-
-<!-- DIAGRAM 2 -->
-<div class="card">
-  <h2>Companions Model</h2>
-  <div class="mermaid" id="chart2">
-flowchart LR
-    subgraph EQ_Side ["⚡ Elders Quorum Side"]
-        direction TB
-        EQM1["👤 EQ Minister 1\n+ Companion"]
-        EQM2["👤 EQ Minister 2\n+ Companion"]
-        EQM3["👤 EQ Minister 3\n+ Companion"]
-        EQF1["🏠 Family A"]
-        EQF2["🏠 Family B"]
-        EQF3["🏠 Family C"]
-        EQM1 --> EQF1
-        EQM2 --> EQF2
-        EQM3 --> EQF3
-    end
-
-    subgraph RS_Side ["💜 Relief Society Side"]
-        direction TB
-        RSM1["👤 RS Minister 1\n+ Companion"]
-        RSM2["👤 RS Minister 2\n+ Companion"]
-        RSM3["👤 RS Minister 3\n+ Companion"]
-        RSF1["🏠 Family A"]
-        RSF2["🏠 Family B"]
-        RSF3["🏠 Family C"]
-        RSM1 --> RSF1
-        RSM2 --> RSF2
-        RSM3 --> RSF3
-    end
-
-    style EQ_Side fill:#E8F4FF,stroke:#4A90D9
-    style RS_Side fill:#FFF0F5,stroke:#D96B8A
+  <!-- PAGE 2: FLOW -->
+  <div id="flow" class="page">
+    <div class="card">
+      <h2>Ministering Flow</h2>
+      <ol>
+        <li><strong>Bishop</strong> presides and assigns oversight to <strong>EQ President</strong> and <strong>RS President</strong></li>
+        <li>Each president appoints a <strong>Counselor</strong> responsible for ministering coordination</li>
+        <li>Counselors manage <strong>Ministerial assignments</strong> (brothers/sisters with companions)</li>
+        <li>Each pair is given <strong>Assigned Families</strong> to minister to</li>
+        <li><strong>EQ</strong> tracks progress through <strong>interviews</strong>; <strong>RS</strong> reports to <strong>Ward Council &amp; LCR</strong></li>
+        <li>The outcome and goal is effective <strong>Ministering</strong> across all assigned families</li>
+      </ol>
+    </div>
   </div>
-</div>
+
+</main>
 
 <footer>
-  Harare Zimbabwe South Stake — General Handbook Ministering Reference &nbsp;|&nbsp; Date: 13 April 2026
+  Harare Zimbabwe South Stake — General Handbook Ministering Reference &nbsp;|&nbsp; Date: 19 April 2026
+  <nav id="main-nav">
+    <button class="nav-btn active" onclick="showPage('org-chart')">Org Chart</button>
+    <button class="nav-btn" onclick="showPage('flow')">Flow</button>
+  </nav>
 </footer>
 
 <script>
-  mermaid.initialize({ startOnLoad: true, theme: 'default', flowchart: { curve: 'basis' } });
+  mermaid.initialize({ 
+    startOnLoad: true, 
+    theme: 'neutral', 
+    securityLevel: 'loose',
+    flowchart: { curve: 'basis' } 
+  });
 
-  function downloadPDF() {
-    window.print();
+  function showPage(pageId) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    // Deactivate all nav buttons
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    
+    // Show target page
+    document.getElementById(pageId).classList.add('active');
+    // Activate target nav button
+    const activeBtn = Array.from(document.querySelectorAll('.nav-btn')).find(b => 
+      b.getAttribute('onclick').includes(pageId)
+    );
+    if (activeBtn) activeBtn.classList.add('active');
+
+    // Re-render mermaid if necessary (sometimes needed for hidden containers)
+    // However, startOnLoad:true usually handles this if they stay in DOM
   }
 
-  async function downloadSVG() {
-    const svg = document.querySelector('#chart1 svg');
-    if (!svg) return alert('Diagram not loaded yet — please wait a moment and try again.');
-    const svgData = new XMLSerializer().serializeToString(svg);
-    const blob = new Blob([svgData], { type: 'image/svg+xml' });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href = url; a.download = 'ministering-diagram.svg'; a.click();
-    URL.revokeObjectURL(url);
-  }
-
-  async function downloadPNG() {
-    const svg = document.querySelector('#chart1 svg');
-    if (!svg) return alert('Diagram not loaded yet — please wait a moment and try again.');
-    const svgData  = new XMLSerializer().serializeToString(svg);
-    const scale    = 3;
-    const canvas   = document.createElement('canvas');
-    const ctx      = canvas.getContext('2d');
-    const img      = new Image();
-    const svgBlob  = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
-    const url      = URL.createObjectURL(svgBlob);
-    img.onload = () => {
-      canvas.width  = img.width  * scale;
-      canvas.height = img.height * scale;
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.scale(scale, scale);
-      ctx.drawImage(img, 0, 0);
-      const a = document.createElement('a');
-      a.download = 'ministering-diagram.png';
-      a.href     = canvas.toDataURL('image/png');
-      a.click();
-      URL.revokeObjectURL(url);
-    };
-    img.src = url;
-  }
 </script>
 </body>
 </html>
