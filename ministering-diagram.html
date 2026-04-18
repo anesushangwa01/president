@@ -18,60 +18,64 @@
       text-align: center;
       margin-bottom: 28px;
     }
-    header h1 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #1a3a6e;
-    }
-    header p {
-      font-size: 0.95rem;
-      color: #555;
-      margin-top: 6px;
-    }
+    header h1 { font-size: 1.7rem; font-weight: 700; color: #1a3a6e; }
+    header h3 { font-size: 1rem; font-weight: 400; color: #4A90D9; margin-top: 4px; }
+    header p  { font-size: 0.9rem; color: #666; margin-top: 4px; }
+
     .card {
       background: #fff;
       border-radius: 16px;
       box-shadow: 0 4px 24px rgba(0,0,0,0.09);
       padding: 32px 24px;
-      max-width: 960px;
+      max-width: 1000px;
       margin: 0 auto 24px;
     }
     .card h2 {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: #1a3a6e;
       margin-bottom: 20px;
       border-left: 4px solid #4A90D9;
       padding-left: 12px;
     }
-    .mermaid { display: flex; justify-content: center; }
+    .mermaid { display: flex; justify-content: center; overflow-x: auto; }
+
+    /* Flow list */
+    ol { padding-left: 20px; }
+    ol li { margin-bottom: 8px; font-size: 0.9rem; line-height: 1.6; }
+    ol li strong { color: #1a3a6e; }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    thead tr { background: #1a3a6e; color: #fff; }
+    thead th { padding: 10px 14px; text-align: left; }
+    tbody tr:nth-child(odd)  { background: #f0f5ff; }
+    tbody tr:nth-child(even) { background: #fff; }
+    tbody td { padding: 9px 14px; }
+    tbody td:first-child { font-weight: 600; color: #1a3a6e; }
+
+    /* Download buttons */
     .btn-row {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 28px 0 12px;
+      display: flex; gap: 12px; justify-content: center;
+      flex-wrap: wrap; margin: 0 0 24px;
     }
     button {
-      padding: 12px 28px;
-      border: none;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
+      padding: 12px 28px; border: none; border-radius: 10px;
+      font-size: 0.95rem; font-weight: 600; cursor: pointer;
       transition: transform 0.15s, box-shadow 0.15s;
     }
     button:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
-    #btn-pdf  { background: #1a3a6e; color: #fff; }
-    #btn-png  { background: #4A90D9; color: #fff; }
-    #btn-svg  { background: #2ECC71; color: #fff; }
-    .note {
-      text-align: center;
-      font-size: 0.8rem;
-      color: #999;
-      margin-top: 8px;
+    #btn-pdf { background: #1a3a6e; color: #fff; }
+    #btn-png { background: #4A90D9; color: #fff; }
+    #btn-svg { background: #2ECC71; color: #fff; }
+    .note { text-align: center; font-size: 0.78rem; color: #aaa; margin-bottom: 18px; }
+
+    footer {
+      text-align: center; font-size: 0.8rem;
+      color: #999; margin-top: 16px; font-style: italic;
     }
+
     @media print {
-      .btn-row, .note, header p { display: none; }
+      .btn-row, .note { display: none; }
       body { background: #fff; }
       .card { box-shadow: none; }
     }
@@ -80,125 +84,159 @@
 <body>
 
 <header>
-  <h1>General Hand Book — Ministering</h1>
-  <p>Harare Zimbabwe South Stake &nbsp;|&nbsp; Unit Level &nbsp;|&nbsp; Date: 13 April 2026</p>
-  <p><em>Focus: Causes &amp; Generations</em></p>
+  <h1>General Handbook — Ministering Structure</h1>
+  <h3>Harare Zimbabwe South Stake — Unit Level</h3>
+  <p><strong>Date:</strong> 13 April 2026 &nbsp;|&nbsp; <strong>Focus:</strong> Causes &amp; Generations</p>
 </header>
 
 <div class="btn-row">
-  <button id="btn-pdf"  onclick="downloadPDF()">⬇ Download as PDF</button>
-  <button id="btn-png"  onclick="downloadPNG()">🖼 Download as PNG</button>
-  <button id="btn-svg"  onclick="downloadSVG()">📐 Download as SVG</button>
+  <button id="btn-pdf" onclick="downloadPDF()">⬇ Download as PDF</button>
+  <button id="btn-png" onclick="downloadPNG()">🖼 Download as PNG</button>
+  <button id="btn-svg" onclick="downloadSVG()">📐 Download as SVG</button>
 </div>
-<div class="note">PNG/SVG requires an internet connection on first load. PDF uses your browser's print dialog.</div>
+<div class="note">
+  PDF → browser print dialog → "Save as PDF" &nbsp;|&nbsp;
+  PNG → high-res image downloaded automatically &nbsp;|&nbsp;
+  SVG → scalable vector file
+</div>
 
+<!-- DIAGRAM 1 -->
 <div class="card">
-  <h2>Ministering Structure</h2>
+  <h2>Ministering Organisation Chart</h2>
   <div class="mermaid" id="chart1">
 flowchart TD
-    BIS(["BISHOP
-    Presiding MV
-    Assist / Test"])
+    Bishop(["🏛️ Bishop\nPresiding / MV Assist"])
 
-    EQP(["EQ President"])
-    RSP(["RS President"])
+    EQP(["👤 EQ President\n(Elders Quorum)"])
+    RSP(["👤 RS President\n(Relief Society)"])
 
-    MINIS["Ministerials
-    ┌──┬──┐
-    │  │  │
-    ├──┼──┤
-    │  │  │
-    └──┴──┘"]
+    EQC["👥 Counselor\n(Responsible for\nMinistering 2nd)"]
+    RSC["👥 Counselor\n(Responsible for\nMinistering 2nd)"]
 
-    COUN_P(["Person"])
-    COUN["Counselor
-    Responsible for
-    Ministering 2nd"]
-    COUN_AND(["and"])
+    EQMIN["📋 Ministerials\n(EQ)"]
+    RSMIN["📋 Ministerials\n(RS)"]
 
-    EQPRES["EQ Presidents + Companions
-    ┌──┬──┬──┐
-    │  │  │  │
-    └──┴──┴──┘"]
+    EQCOMP["👫 EQ Presidents\n+ Companions"]
+    RSCOMP["👫 RS Presidents\n+ LS Presidents"]
 
-    INT["Interviews
-    Families A  |  B  |  C"]
+    EQFAM["🏠 Assigned Families\n(EQ)"]
+    RSFAM["🏠 Assigned Families\n(RS)"]
 
-    ASGN["Assigned Families
-    Families A  |  B  |  C"]
+    EQINT["🗓️ Interviews\n(EQ)"]
+    RSINFO["📢 Inform Ward Council\n+ LCR (RS)"]
 
-    RSPRES["RS Presidents
-    Families A  |  B  |  C"]
+    MIN(["🤝 Ministering\n(Goal & Outcome)"])
 
-    LSPRES["LS Presidents
-    → Inform Ward Council + LCR"]
+    Bishop -->|"delegates"| EQP
+    Bishop -->|"delegates"| RSP
 
-    ALLPRES["All Presidents  (EQ + RS)
-    ┌──┬──┬──┐
-    │  │  │  │
-    ├──┼──┬──┤
-    │  │  │  │
-    └──┴──┴──┘"]
+    EQP --> EQC
+    RSP --> RSC
 
-    MINISTER(["MINISTERING
-    Coordinator of Affairs"])
+    EQC --> EQMIN
+    RSC --> RSMIN
 
-    EQP <-->|" "| BIS
-    BIS -->|"Delegated through Additional"| RSP
+    EQMIN --> EQCOMP
+    RSMIN --> RSCOMP
 
-    EQP --> MINIS
+    EQCOMP --> EQFAM
+    RSCOMP --> RSFAM
 
-    RSP --- COUN_P
-    COUN_P --- COUN
-    COUN --- COUN_AND
+    EQCOMP --> EQINT
+    RSCOMP --> RSINFO
 
-    MINIS --> EQPRES
-    EQPRES --> INT
-    INT --> ASGN
-    ASGN --> RSPRES
-    RSPRES --> LSPRES
+    EQFAM --> MIN
+    RSFAM --> MIN
 
-    ALLPRES -->|"Coordinator of Affairs"| MINISTER
-
-    style BIS fill:#1a3a6e,color:#fff,stroke:#0d1f3c
-    style EQP fill:#3a6bc9,color:#fff,stroke:#1a3a6e
-    style RSP fill:#c93a6b,color:#fff,stroke:#6e1a3a
-    style MINIS fill:#e8f4ff,color:#1a2a4e,stroke:#3a6bc9
-    style COUN fill:#fff0f5,color:#4e1a2a,stroke:#c93a6b
-    style COUN_P fill:#e0e8ff,color:#333,stroke:#3a6bc9
-    style COUN_AND fill:#e0e8ff,color:#333,stroke:#3a6bc9
-    style EQPRES fill:#dceeff,color:#1a2a4e,stroke:#3a6bc9
-    style INT fill:#e8f8e8,color:#1a3a1a,stroke:#2ECC71
-    style ASGN fill:#e8f8e8,color:#1a3a1a,stroke:#2ECC71
-    style RSPRES fill:#ffe8f0,color:#4e1a2a,stroke:#c93a6b
-    style LSPRES fill:#fff3e0,color:#4e2a00,stroke:#e67e22
-    style ALLPRES fill:#1a3a6e,color:#fff,stroke:#0d1f3c
-    style MINISTER fill:#2ECC71,color:#fff,stroke:#1a8a4a
+    style Bishop fill:#4A90D9,color:#fff,stroke:#2c5f8a
+    style EQP fill:#5B8DD9,color:#fff,stroke:#2c5f8a
+    style RSP fill:#D96B8A,color:#fff,stroke:#8a2c4a
+    style EQC fill:#7BAAD4,color:#fff,stroke:#2c5f8a
+    style RSC fill:#D98AA8,color:#fff,stroke:#8a2c4a
+    style EQMIN fill:#A8C8E8,color:#333,stroke:#2c5f8a
+    style RSMIN fill:#E8A8C0,color:#333,stroke:#8a2c4a
+    style EQCOMP fill:#C8DFF0,color:#333,stroke:#2c5f8a
+    style RSCOMP fill:#F0C8D8,color:#333,stroke:#8a2c4a
+    style EQFAM fill:#E8F4E8,color:#333,stroke:#2c7a2c
+    style RSFAM fill:#F4E8F4,color:#333,stroke:#7a2c7a
+    style EQINT fill:#FFF0C0,color:#333,stroke:#8a6a00
+    style RSINFO fill:#FFF0C0,color:#333,stroke:#8a6a00
+    style MIN fill:#2ECC71,color:#fff,stroke:#1a8a4a
   </div>
 </div>
 
+<!-- KEY ROLES TABLE -->
 <div class="card">
-  <h2>Structure Summary</h2>
-  <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+  <h2>Key Roles &amp; Responsibilities</h2>
+  <table>
     <thead>
-      <tr style="background:#1a3a6e;color:#fff;">
-        <th style="padding:10px 14px;text-align:left;border-radius:8px 0 0 0;">Role</th>
-        <th style="padding:10px 14px;text-align:left;border-radius:0 8px 0 0;">Responsibility</th>
-      </tr>
+      <tr><th>Role</th><th>Responsibility</th></tr>
     </thead>
     <tbody>
-      <tr style="background:#f0f5ff;"><td style="padding:9px 14px;font-weight:600;">Bishop</td><td style="padding:9px 14px;">Presides over the unit (MV / Assist)</td></tr>
-      <tr><td style="padding:9px 14px;font-weight:600;">EQ President</td><td style="padding:9px 14px;">Elders Quorum — bidirectional link with Bishop</td></tr>
-      <tr style="background:#f0f5ff;"><td style="padding:9px 14px;font-weight:600;">RS President</td><td style="padding:9px 14px;">Relief Society — receives delegation from Bishop</td></tr>
-      <tr><td style="padding:9px 14px;font-weight:600;">Ministerials</td><td style="padding:9px 14px;">Assigned ministerial brothers (companions)</td></tr>
-      <tr style="background:#f0f5ff;"><td style="padding:9px 14px;font-weight:600;">Counselor</td><td style="padding:9px 14px;">Responsible for Ministering 2nd</td></tr>
-      <tr><td style="padding:9px 14px;font-weight:600;">EQ Presidents + Companions</td><td style="padding:9px 14px;">Conduct interviews with assigned families</td></tr>
-      <tr style="background:#f0f5ff;"><td style="padding:9px 14px;font-weight:600;">Assigned Families</td><td style="padding:9px 14px;">Families receiving ministering</td></tr>
-      <tr><td style="padding:9px 14px;font-weight:600;">RS → LS Presidents</td><td style="padding:9px 14px;">Report to Ward Council + LCR</td></tr>
-      <tr style="background:#f0f5ff;"><td style="padding:9px 14px;font-weight:600;">All Presidents</td><td style="padding:9px 14px;">Coordinate overall Ministering</td></tr>
+      <tr><td>Bishop</td><td>Presides over the unit; delegates ministering oversight</td></tr>
+      <tr><td>EQ President</td><td>Oversees Elders Quorum ministering assignments</td></tr>
+      <tr><td>RS President</td><td>Oversees Relief Society ministering assignments</td></tr>
+      <tr><td>Counselor (EQ)</td><td>Directly responsible for EQ ministering coordination</td></tr>
+      <tr><td>Counselor (RS)</td><td>Directly responsible for RS ministering coordination</td></tr>
+      <tr><td>Ministerials (EQ)</td><td>Assigned ministering brothers</td></tr>
+      <tr><td>Ministerials (RS)</td><td>Assigned ministering sisters</td></tr>
+      <tr><td>LS Presidents</td><td>Assist RS Presidents; report to Ward Council + LCR</td></tr>
     </tbody>
   </table>
 </div>
+
+<!-- MINISTERING FLOW -->
+<div class="card">
+  <h2>Ministering Flow</h2>
+  <ol>
+    <li><strong>Bishop</strong> presides and assigns oversight to <strong>EQ President</strong> and <strong>RS President</strong></li>
+    <li>Each president appoints a <strong>Counselor</strong> responsible for ministering coordination</li>
+    <li>Counselors manage <strong>Ministerial assignments</strong> (brothers/sisters with companions)</li>
+    <li>Each pair is given <strong>Assigned Families</strong> to minister to</li>
+    <li><strong>EQ</strong> tracks progress through <strong>interviews</strong>; <strong>RS</strong> reports to <strong>Ward Council &amp; LCR</strong></li>
+    <li>The outcome and goal is effective <strong>Ministering</strong> across all assigned families</li>
+  </ol>
+</div>
+
+<!-- DIAGRAM 2 -->
+<div class="card">
+  <h2>Companions Model</h2>
+  <div class="mermaid" id="chart2">
+flowchart LR
+    subgraph EQ_Side ["⚡ Elders Quorum Side"]
+        direction TB
+        EQM1["👤 EQ Minister 1\n+ Companion"]
+        EQM2["👤 EQ Minister 2\n+ Companion"]
+        EQM3["👤 EQ Minister 3\n+ Companion"]
+        EQF1["🏠 Family A"]
+        EQF2["🏠 Family B"]
+        EQF3["🏠 Family C"]
+        EQM1 --> EQF1
+        EQM2 --> EQF2
+        EQM3 --> EQF3
+    end
+
+    subgraph RS_Side ["💜 Relief Society Side"]
+        direction TB
+        RSM1["👤 RS Minister 1\n+ Companion"]
+        RSM2["👤 RS Minister 2\n+ Companion"]
+        RSM3["👤 RS Minister 3\n+ Companion"]
+        RSF1["🏠 Family A"]
+        RSF2["🏠 Family B"]
+        RSF3["🏠 Family C"]
+        RSM1 --> RSF1
+        RSM2 --> RSF2
+        RSM3 --> RSF3
+    end
+
+    style EQ_Side fill:#E8F4FF,stroke:#4A90D9
+    style RS_Side fill:#FFF0F5,stroke:#D96B8A
+  </div>
+</div>
+
+<footer>
+  Harare Zimbabwe South Stake — General Handbook Ministering Reference &nbsp;|&nbsp; Date: 13 April 2026
+</footer>
 
 <script>
   mermaid.initialize({ startOnLoad: true, theme: 'default', flowchart: { curve: 'basis' } });
@@ -209,27 +247,25 @@ flowchart TD
 
   async function downloadSVG() {
     const svg = document.querySelector('#chart1 svg');
-    if (!svg) return alert('Diagram not loaded yet, please wait a moment.');
+    if (!svg) return alert('Diagram not loaded yet — please wait a moment and try again.');
     const svgData = new XMLSerializer().serializeToString(svg);
     const blob = new Blob([svgData], { type: 'image/svg+xml' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'ministering-diagram.svg';
-    a.click();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = 'ministering-diagram.svg'; a.click();
     URL.revokeObjectURL(url);
   }
 
   async function downloadPNG() {
     const svg = document.querySelector('#chart1 svg');
-    if (!svg) return alert('Diagram not loaded yet, please wait a moment.');
-    const svgData = new XMLSerializer().serializeToString(svg);
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const img = new Image();
-    const scale = 3; // high resolution
-    const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
-    const url = URL.createObjectURL(svgBlob);
+    if (!svg) return alert('Diagram not loaded yet — please wait a moment and try again.');
+    const svgData  = new XMLSerializer().serializeToString(svg);
+    const scale    = 3;
+    const canvas   = document.createElement('canvas');
+    const ctx      = canvas.getContext('2d');
+    const img      = new Image();
+    const svgBlob  = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+    const url      = URL.createObjectURL(svgBlob);
     img.onload = () => {
       canvas.width  = img.width  * scale;
       canvas.height = img.height * scale;
@@ -239,7 +275,7 @@ flowchart TD
       ctx.drawImage(img, 0, 0);
       const a = document.createElement('a');
       a.download = 'ministering-diagram.png';
-      a.href = canvas.toDataURL('image/png');
+      a.href     = canvas.toDataURL('image/png');
       a.click();
       URL.revokeObjectURL(url);
     };
