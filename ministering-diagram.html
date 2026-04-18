@@ -182,11 +182,11 @@
 flowchart TD
     Bishop(["🏛️ Bishop\nPresiding / High Priest"])
 
-    EQP(["👤 EQ President\n(Elders Quorum)"])
-    RSP(["👤 RS President\n(Relief Society)"])
+    EQP(["👤 EQ President (Keys)\n(Elders Quorum)"])
+    RSP(["👤 RS President (Keys)\n(Relief Society)"])
 
-    EQC["👥 Counselor\n(Responsible for\nMinistering 2nd)"]
-    RSC["👥 Counselor\n(Responsible for\nMinistering 2nd)"]
+    EQC["👥 Counselors"]
+    RSC["👥 Counselors"]
 
     EQMIN["📋 Ministerials\n(EQ)"]
     RSMIN["📋 Ministerials\n(RS)"]
@@ -197,10 +197,10 @@ flowchart TD
     EQFAM["🏠 Assigned Families\n(EQ)"]
     RSFAM["🏠 Assigned Families\n(RS)"]
 
-    EQINT["🗓️ Interviews\n(EQ)"]
-    RSINFO["📢 Inform Ward Council\n+ LCR (RS)"]
+    EQINT["🗓️ Interviews (EQ)"]
+    RSINFO["🗓️ Interviews (RS)"]
 
-    MIN(["🤝 Ministering\n(Goal & Outcome)"])
+    MIN(["📢 Inform Ward Council\n+ LCR + Record"])
 
     Bishop -->|"delegates"| EQP
     Bishop -->|"delegates"| RSP
@@ -222,6 +222,8 @@ flowchart TD
 
     EQFAM --> MIN
     RSFAM --> MIN
+    EQINT --> MIN
+    RSINFO --> MIN
 
     style Bishop fill:#000000,color:#ffffff,stroke:#000000
     style EQP fill:#444444,color:#ffffff,stroke:#000000
@@ -247,11 +249,11 @@ flowchart TD
       <h2>Ministering Flow</h2>
       <ol>
         <li><strong>Bishop</strong> presides and assigns oversight to <strong>EQ President</strong> and <strong>RS President</strong></li>
-        <li>Each president appoints a <strong>Counselor</strong> responsible for ministering coordination</li>
+        <li>Each president appoints <strong>Counselors</strong> responsible for ministering coordination</li>
         <li>Counselors manage <strong>Ministerial assignments</strong> (brothers/sisters with companions)</li>
         <li>Each pair is given <strong>Assigned Families</strong> to minister to</li>
-        <li><strong>EQ</strong> tracks progress through <strong>interviews</strong>; <strong>RS</strong> reports to <strong>Ward Council &amp; LCR</strong></li>
-        <li>The outcome and goal is effective <strong>Ministering</strong> across all assigned families</li>
+        <li>Both <strong>EQ</strong> and <strong>RS</strong> track progress through <strong>interviews</strong></li>
+        <li>The final outcome and goal is to <strong>Inform Ward Council + LCR + Record</strong> all progress</li>
       </ol>
     </div>
   </div>
